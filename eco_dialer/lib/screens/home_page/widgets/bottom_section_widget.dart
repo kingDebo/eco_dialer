@@ -8,6 +8,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'contactNumber_dialog.dart';
+
 class BottomSection extends StatelessWidget {
   const BottomSection({
     Key? key,
@@ -84,7 +86,14 @@ class BottomSection extends StatelessWidget {
 
         //*363*1#
       } catch (e) {
-        print('Error ');
+        _showToastMessage('User Cancelled Operation');
+      }
+    } else if (action == 'Please call me') {
+      try {
+        String contactNumber = await _getContactNumber(context);
+        FlutterPhoneDirectCaller.callNumber('*126*1767$contactNumber#');
+      } catch (e) {
+        _showToastMessage('User Cancelled Operation');
       }
     } else {
       FlutterPhoneDirectCaller.callNumber(number);
@@ -166,6 +175,14 @@ class BottomSection extends StatelessWidget {
         });
   }
 
-  void _showToastMessage(String message) => Fluttertoast.showToast(
-      msg: message, fontSize: 13, gravity: ToastGravity.TOP);
+  Future<String> _getContactNumber(BuildContext context) async {
+    return await showDialog(
+        context: context,
+        builder: (context) {
+          return ContactNumberDialog();
+        });
+  }
+
+  void _showToastMessage(String message) =>
+      Fluttertoast.showToast(msg: message, fontSize: 13);
 }

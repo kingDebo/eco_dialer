@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:eco_dialer/providers/homepage_provider.dart';
-import 'package:eco_dialer/widgets/bottom_section_widget.dart';
-import 'package:eco_dialer/widgets/top_section_widget.dart';
+import 'package:eco_dialer/screens/home_page/widgets/bottom_section_widget.dart';
+import 'package:eco_dialer/screens/home_page/widgets/top_section_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:google_fonts/google_fonts.dart';

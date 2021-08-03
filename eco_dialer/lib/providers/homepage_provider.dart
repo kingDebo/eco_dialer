@@ -43,10 +43,12 @@ class HomePageProvider extends ChangeNotifier {
     'Flow': {
       'Utilities': [
         {'action': 'My Balance', 'number': '*120#'},
-        {'action': 'My Number', 'number': '*129*7*1#'},
+        {'action': 'Please call me', 'number': '*126*XXXX-XXX-XXXX#'},
         {'action': 'Data Balance', 'number': '*129*4#'},
         {'action': 'Cancel Auto-Renewal', 'number': '*363*1#'},
-        {'action': 'Get Active Plans', 'number': '*129*5#'}
+        {'action': 'My Number', 'number': '*129*7*1#'},
+        {'action': 'Get Active Plans', 'number': '*129*5#'},
+        {'action': 'General Menu', 'number': '*129#'},
       ],
       'Combo Plans': [
         {'action': '1-Day 1GB/20mins ', 'number': '*129*6*3*1#', 'cost': '\$5'},
