@@ -1,13 +1,25 @@
+import 'package:eco_dialer/constants/colors.dart';
 import 'package:eco_dialer/providers/homepage_provider.dart';
+import 'package:eco_dialer/providers/timer_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
-import 'screens/home_page.dart';
+import 'package:flutter/services.dart';
+import 'screens/home_page/home_page.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-      create: (context) => HomePageProvider(), child: MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => HomePageProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => TimerProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => Pallete(),
+    )
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,27 +28,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+    var colorProvider = Provider.of<Pallete>(context);
+
+    return NeumorphicApp(
         debugShowCheckedModeBanner: false,
         title: 'EcoDialer',
-        theme: ThemeData(
-            primaryColor: Color(0xFF010A18),
-            accentColor: Color(0xFF111A29),
-            dividerColor: Color(0xFF707070),
-            primarySwatch: Colors.grey,
-            textTheme: TextTheme(
-                headline1: GoogleFonts.montserrat(
-                    color: textMainColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
-                headline2: GoogleFonts.montserrat(
-                  color: textMainColor,
-                  fontSize: 15,
-                ),
-                headline3: GoogleFonts.montserrat(
-                    color: textMainColor, fontSize: 12))),
+        theme: colorProvider.lightTheme,
+        darkTheme: colorProvider.darkTheme,
+        themeMode: colorProvider.currentTheme,
         home: HomePage(
-          title: 'ecoDialer',
+          title: 'Eco Dialer',
         ));
   }
 }

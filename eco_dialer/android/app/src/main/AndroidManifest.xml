@@ -2,7 +2,7 @@
     package="KingzSoftware.eco_dialer">
    <application
         android:label="ecoDialer"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/eco_dialer_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

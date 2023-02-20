@@ -6,14 +6,13 @@ class HomePageProvider extends ChangeNotifier {
   String selectedCategory = 'Utilities';
 
   List<String> serviceProviders = ['Flow', 'Digicel'];
-  List<String> categories = [
-    'Utilities',
-    'Combo Plans',
-    'Data Plans',
-    'Roaming'
-  ];
 
-  Map<String, Map<String, List<Map<String, String>>>> numbers = {
+  Map<String, List<String>> categories = {
+    'Flow': ['Utilities', 'Combo Plans', 'Data Plans', 'Roaming'],
+    'Digicel': ['Utilities']
+  };
+
+  Map<String, Map<String, List<Map<String, dynamic>>>> numbers = {
     'Digicel': {
       'Utilities': [
         {'action': 'My Balance', 'number': '*120#'},
@@ -21,24 +20,6 @@ class HomePageProvider extends ChangeNotifier {
         {'action': 'Data Balance', 'number': '*136#'},
         {'action': 'Get Active Plans', 'number': '*123#'}
       ],
-      'Combo Plans': [
-        {'action': '1-Day 1GB/20mins ', 'number': '*129*6*3*1#'},
-        {'action': '3-Day 4GB/150mins ', 'number': '*129*6*3*2#'},
-        {'action': '7-Day 8GB/500mins ', 'number': '*129*6*3*3#'},
-        {'action': '30-Day 16GB/800mins ', 'number': '*129*6*3*4#'},
-        {'action': '30-Day 16GB/800mins ', 'number': '*129*6*3*4#'},
-      ],
-      'Data Plans': [
-        {'action': '1-Day 500MB', 'number': '*129*6*1*1#', 'cost': '\$3.00'},
-        {'action': '3-Day 2GB', 'number': '*129*6*1*2#', 'cost': '\$9.00'},
-        {'action': '7-Day 5GB', 'number': '*129*6*1*3#', 'cost': '\$22.00'},
-        {'action': '14-Day 10GB', 'number': '*129*6*1*4#', 'cost': '\$40.00'},
-        {'action': '30-Day 12GB', 'number': '*129*6*1*5#', 'cost': '\$50.00'},
-      ],
-      'Roaming': [
-        {'action': 'Travel Pass 500MB Data', 'number': '*129*6*4*1#'},
-        {'action': 'Int Roaming', 'number': '*129*6*4*2#'},
-      ]
     },
     'Flow': {
       'Utilities': [
@@ -51,29 +32,65 @@ class HomePageProvider extends ChangeNotifier {
         {'action': 'General Menu', 'number': '*129#'},
       ],
       'Combo Plans': [
-        {'action': '1-Day 1GB/20mins ', 'number': '*129*6*3*1#', 'cost': '\$5'},
+        {
+          'action': '1-Day 1GB/20mins ',
+          'number': '*129*6*3*1#',
+          'cost': '\$5',
+          'duration': 24
+        },
         {
           'action': '3-Day 4GB/150mins ',
           'number': '*129*6*3*2#',
-          'cost': '\$12'
+          'cost': '\$12',
+          'duration': 72
         },
         {
           'action': '7-Day 8GB/500mins ',
           'number': '*129*6*3*3#',
-          'cost': '\$30'
+          'cost': '\$30',
+          'duration': 168
         },
         {
           'action': '30-Day 16GB/800mins ',
           'number': '*129*6*3*4#',
-          'cost': '\$75'
+          'cost': '\$75',
+          'duration': 720
         },
       ],
       'Data Plans': [
-        {'action': '1-Day 500MB', 'number': '*129*6*1*1#', 'cost': '\$3.00'},
-        {'action': '3-Day 2GB', 'number': '*129*6*1*2#', 'cost': '\$9.00'},
-        {'action': '7-Day 5GB', 'number': '*129*6*1*3#', 'cost': '\$22.00'},
-        {'action': '14-Day 10GB', 'number': '*129*6*1*4#', 'cost': '\$40.00'},
-        {'action': '30-Day 12GB', 'number': '*129*6*1*5#', 'cost': '\$50.00'},
+        {
+          'action': '1-Day 500MB',
+          'number': '*129*6*1*1#',
+          'cost': '\$3.00',
+          'duration': 24
+        },
+        {
+          'action': '3-Day 2GB',
+          'number': '*129*6*1*2#',
+          'cost': '\$9.00',
+          'duration': 72
+        },
+        {
+          'action': '7-Day 5GB',
+          'number': '*129*6*1*3#',
+          'cost': '\$22.00',
+          'duration': 168
+        },
+        {
+          'action': '14-Day 10GB',
+          'number': '*129*6*1*4#',
+          'cost': '\$40.00',
+          'duration': 336
+        },
+        {
+          'action': '30-Day 12GB',
+          'number': '*129*6*1*5#',
+          'cost': '\$50.00',
+          'duration': 720
+        },
+      ],
+      'Loans': [
+        {'action': 'Loan Menu', 'number': '*536#'}
       ],
       'Roaming': [
         {'action': 'Travel Pass 500MB Data', 'number': '*129*6*4*1#'},
@@ -84,6 +101,9 @@ class HomePageProvider extends ChangeNotifier {
 
   void setServiceProvider(String serviceProvider) {
     this.serviceProvider = serviceProvider;
+    if (this.serviceProvider == 'Digicel') {
+      this.selectedCategory = 'Utilities';
+    }
     notifyListeners();
   }
 
